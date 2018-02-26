@@ -33,3 +33,9 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# web assets
+/web/assets
+
+# web img
+/web/img

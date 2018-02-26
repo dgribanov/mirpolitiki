@@ -36,6 +36,17 @@ class LoginForm extends Model
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return \array_merge([
+            'username'         => 'Имя',
+            'password'         => 'Пароль',
+        ], parent::attributeLabels());
+    }
+
+    /**
      * Validates the password.
      * This method serves as the inline validation for password.
      *

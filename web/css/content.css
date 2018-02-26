@@ -1,0 +1,58 @@
+#contentcolumn a{ color: #232323; font-weight: bold; text-decoration: none; font-size: 13px; }
+#contentcolumn a:hover{ text-decoration: underline; color: #000099;}
+
+#contentcolumn h1{  font-size: 20px; font-weight: bold; color: #660000;   margin: 0;}
+#contentcolumn h2 a{ font-size: 18px; font-weight: bold; color: #333366;   }
+
+#contentcolumn h3{ text-align:center; padding: 0; margin: 5px 0; font-size: 16px; font-weight: bold; color: #000000; }
+#contentcolumn h4{ padding: 0; margin: 5px 0; font-size: 14px; font-weight: bold; color: #000000; }
+
+
+ #contentcolumn p{
+
+margin-bottom:10px;
+}
+
+.br_all{ border-radius: 20px; }
+.br_tl{ border-top-left-radius: 20px; }
+.br_tr{ border-top-right-radius: 20px; }
+.br_br{ border-bottom-right-radius: 20px; }
+.br_bl{ border-bottom-left-radius: 20px; }
+
+.pad5{ padding: 5px; }
+.pad10{ padding: 10px; }
+
+.m_b5{ margin-bottom: 5px; }
+.m_b10{ margin-bottom: 10px; }
+.m_b15{ margin-bottom: 15px; }
+.m_b20{ margin-bottom: 20px; }
+
+p{
+text-align:justify;
+/*text-indent:0px;*/
+line-height:17px;
+margin-bottom:10px;
+}
+
+.jj {
+	text-align:justify;
+	line-height:15px;
+	font-size:12px;
+}
+#leftcol .link1 {
+	font-weight: bold;
+	font-size:14px;
+}
+
+
+#cse{ width:570px;}
+#cse-search-results iframe{ width:580px;}
+#contentcolumn .figure{margin:5px 40px; text-align: justify; font-size:11px;}
+
+#rotaban_210970, #rotaban_211969{width: 234px; margin:0 auto;}
+#main_container .rotaban a  { margin-bottom: 0px; }
+
+.rb{ text-align: right; font-weight: bold; }
+.cb{ text-align: center; font-weight: bold; }
+.ci{ text-align: center; font-style: italic; }
+.ri{ text-align: right; font-style: italic; }

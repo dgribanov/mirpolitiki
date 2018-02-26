@@ -7,9 +7,17 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'       => 'ru',
+    'sourceLanguage' => 'ru',
+    'timeZone'       => 'Europe/Moscow',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
+        ],
     ],
     'components' => [
         'request' => [
@@ -43,14 +51,30 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'pattern' => '<controller>/<action>',
+                    'route'   => '<controller>/<action>',
+                ],
+
+                [
+                    'pattern' => 'admin/<controller>/<action:(view|update|delete)>/<id:\d+>',
+                    'route'   => 'admin/<controller>/<action>',
+                ],
+                [
+                    'pattern' => 'admin/<controller>/<action>',
+                    'route'   => 'admin/<controller>/<action>',
+                ],
+
+                [
+                    'pattern' => '/',
+                    'route'   => 'site/index',
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

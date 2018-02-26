@@ -3,12 +3,18 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Article;
+use app\models\Tag;
+use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
+use yii\db\Expression;
 
 class SiteController extends Controller
 {
@@ -29,12 +35,12 @@ class SiteController extends Controller
                     ],
                 ],
             ],
-            'verbs' => [
+            /*'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
-            ],
+            ],*/
         ];
     }
 
@@ -55,13 +61,68 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays index page.
      *
-     * @return string
+     * @param $type integer
+     * @param $tag integer
+     *
+     * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type = null, $tag = null)
     {
-        return $this->render('index');
+        $query = Article::find();
+
+        if ($type && \in_array((int)$type, Article::getTypes())) {
+            $query->andWhere(['type' => $type]);
+        }
+
+        if ($tag && isset(Tag::getAllTagsList()[$tag])) {
+            $query
+                ->joinWith(['articleTags'], false, 'INNER JOIN')
+                ->andWhere(['articles_tags.tag_id' => $tag]);
+        }
+
+        $articlesDataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('index', [
+            'articlesDataProvider' => $articlesDataProvider
+        ]);
+    }
+
+    /**
+     * Displays detail page.
+     *
+     * @param $id integer
+     *
+     * @return mixed
+     */
+    public function actionDetail($id = null)
+    {
+        $article = $this->findModel($id);
+
+        $tags = $article->tagsList;
+        $select = new Expression(
+            'id,
+            title,
+            (SELECT Count(*) FROM articles as articles_count WHERE articles_count.is_deleted = false AND articles_count.type = articles.type) as typeCount,
+            (SELECT Count(*) FROM articles_tags WHERE articles_tags.is_deleted = false AND articles.id = articles_tags.article_id AND articles_tags.tag_id IN (' . \implode(', ', $tags) . ')) as tagsCount'
+        );
+        $similarArticles =
+            (new Query())
+                ->select($select)
+                ->from('articles')
+                ->where(['articles.is_deleted' => false])
+                ->andWhere(['not', ['articles.id' => $id]])
+                ->orderBy(['tagsCount' => SORT_DESC, 'typeCount' => SORT_DESC])
+                ->limit(5)
+                ->all();
+
+        return $this->render('detail', [
+            'article' => $article,
+            'similarArticles' => $similarArticles
+        ]);
     }
 
     /**
@@ -122,5 +183,21 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Finds the Article model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Article the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Article::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

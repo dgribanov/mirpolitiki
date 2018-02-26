@@ -1,0 +1,42 @@
+#regform table {
+	width: 600px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#regform  table td {
+	padding: 8px;
+}
+.td_left {
+font-size: 11px;
+font-weight:bold;
+	 width: 150px;
+	 vertical-align: middle;
+	 text-align: right;
+}
+.td_right {
+
+}
+.td_info {
+	width: 150px;
+	color: #666;
+	font-size: 10px;
+	vertical-align: top;
+}
+.td_button {
+	border-top: 1px solid #EEEEEE;
+}
+.mini {
+	color: #666;
+	font-size: 10px;
+}
+.correct {
+	color: green;
+	font-size: 10px;
+}
+.acorrect {
+	color: red;
+	font-size: 10px;
+}
+#FIO3_correct1 {
+	color: #FFFFFF;
+}
