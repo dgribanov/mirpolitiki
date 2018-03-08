@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
         'js/highslide/highslide.config.js',
     ];
     public $depends = [
-        //'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

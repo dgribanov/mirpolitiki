@@ -65,10 +65,12 @@ class SiteController extends Controller
      *
      * @param $type integer
      * @param $tag integer
+     * @param $page integer
+     * @param $per_page integer
      *
      * @return mixed
      */
-    public function actionIndex($type = null, $tag = null)
+    public function actionIndex($type = null, $tag = null, $page = null, $per_page = null)
     {
         $query = Article::find();
 
@@ -84,6 +86,15 @@ class SiteController extends Controller
 
         $articlesDataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => $per_page ? $per_page : 10,
+                'page' => $page ? $page - 1 : 0,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
         ]);
 
         return $this->render('index', [

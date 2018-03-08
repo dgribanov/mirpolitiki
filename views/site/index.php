@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 /**
  * @var $this yii\web\View
@@ -32,3 +33,13 @@ $this->title = 'Геополитика и мировая политика';
     </div>
     <div class="clearer"></div>
 <?php endforeach; ?>
+
+<?php
+    echo LinkPager::widget([
+        'pagination' => $articlesDataProvider->pagination,
+        'maxButtonCount' => 5,
+        'nextPageLabel' => 'Следующая',
+        'prevPageLabel' => 'Предыдущая',
+    ]);
+?>
+<div class="clearer"></div>
