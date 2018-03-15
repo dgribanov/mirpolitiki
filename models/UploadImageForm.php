@@ -84,7 +84,7 @@ class UploadImageForm extends Model
      */
     public function init()
     {
-        $this->imagesDirPath = \Yii::getAlias('@web/img') . '/';
+        $this->imagesDirPath = \Yii::getAlias('@web');
     }
 
     /**
@@ -124,6 +124,6 @@ class UploadImageForm extends Model
             throw new \RuntimeException('File field of MediaFile must be instance of UploadedFile');
         }
 
-        return \md5(\microtime(true)) . '.' . \strtolower($this->imageFile->extension);
+        return ImageFile::BASE_IMG_PATH . \md5(\microtime(true)) . '.' . \strtolower($this->imageFile->extension);
     }
 }

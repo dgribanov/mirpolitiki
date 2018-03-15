@@ -20,6 +20,8 @@ use yii\helpers\ArrayHelper;
  */
 class ImageFile extends BaseModel
 {
+    const BASE_IMG_PATH = '/img/';
+
     /**
      * @inheritdoc
      */
@@ -64,7 +66,7 @@ class ImageFile extends BaseModel
             return null;
         }
 
-        return Url::to('@web/img/' . $this->file_name);
+        return Url::to('@web' . $this->file_name);
     }
 
     /**

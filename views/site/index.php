@@ -14,7 +14,12 @@ $this->title = 'Геополитика и мировая политика';
 
 <h1><?= $this->title; ?></h1>
 
-<?php foreach ($articlesDataProvider->models as $article): ?>
+<?php
+    /**
+     * @var $article \app\models\Article
+     */
+    foreach ($articlesDataProvider->models as $article):
+?>
     <div class="b1">
         <h2>
             <a href="<?= Url::to(['site/detail', 'id' => $article->id]); ?>" title="<?= $article->title; ?>">

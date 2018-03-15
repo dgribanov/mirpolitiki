@@ -162,7 +162,21 @@ AppAsset::register($this);
             <div class="topmenu-holder">
                 <ul class="topmenu-list">
                     <li>
-                        <a href="/" title="Геополитика и мировая политика" class="current">Главная</a>
+                        <?= Html::a(
+                                'Главная',
+                                Url::to(
+                                    [
+                                        'site/index',
+                                    ]
+                                ),
+                                [
+                                    'title' => 'Геополитика и мировая политика',
+                                    'class' => !\Yii::$app->request->get('type') ?
+                                        'current' :
+                                        null,
+                                ]
+                            );
+                        ?>
                     </li>
                     <li>
                         <?= Html::a(
@@ -174,7 +188,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'Политика'
+                                    'title' => 'Политика',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_POLITICS ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
@@ -189,7 +206,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'Экономика'
+                                    'title' => 'Экономика',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_ECONOMICS ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
@@ -204,7 +224,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'События'
+                                    'title' => 'События',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_EVENTS ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
@@ -219,7 +242,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'Общество'
+                                    'title' => 'Общество',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_SOCIETY ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
@@ -234,7 +260,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'История и культура'
+                                    'title' => 'История и культура',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_HISTORY ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
@@ -249,7 +278,10 @@ AppAsset::register($this);
                                     ]
                                 ),
                                 [
-                                    'title' => 'Видео'
+                                    'title' => 'Видео',
+                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_VIDEO ?
+                                        'current' :
+                                        null,
                                 ]
                             );
                         ?>
