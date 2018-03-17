@@ -121,11 +121,10 @@ AppAsset::register($this);
                             echo Html::a('Вход', Url::to(['site/login']), ['title' => 'Вход']);
                         } else {
                             echo Html::a('Выход', Url::to(['site/logout']), ['title' => 'Выход']);
-                        }
-                    ?>
-                    <?php
-                        if (Yii::$app->user->identity->isAdmin) {
-                            echo Html::a('Админка', Url::to(['admin/articles']), ['title' => 'Админка']);
+
+                            if (Yii::$app->user->identity->isAdmin) {
+                                echo Html::a('Админка', Url::to(['admin/articles']), ['title' => 'Админка']);
+                            }
                         }
                     ?>
 
