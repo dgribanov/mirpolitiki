@@ -74,7 +74,7 @@ class Article extends BaseModel
      */
     public function getHeaderImage()
     {
-        return $this->hasOne(ImageFile::class, ['id' => 'header_image_id']);
+        return $this->hasOne(ImageFile::className(), ['id' => 'header_image_id']);
     }
 
     /**
@@ -82,7 +82,7 @@ class Article extends BaseModel
      */
     public function getArticleTags()
     {
-        return $this->hasMany(ArticleTag::class, ['article_id' => 'id'])->inverseOf('article');
+        return $this->hasMany(ArticleTag::className(), ['article_id' => 'id'])->inverseOf('article');
     }
 
     /**
@@ -90,7 +90,7 @@ class Article extends BaseModel
      */
     public function getTags()
     {
-        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('articleTags');
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->via('articleTags');
     }
 
     /**

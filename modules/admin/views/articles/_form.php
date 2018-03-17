@@ -42,12 +42,12 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
         );
     ?>
 
-    <?= $form->field($model, 'description')->widget(CKEditor::class, [
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
 
-    <?= $form->field($model, 'text')->widget(CKEditor::class, [
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'options' => ['rows' => 12],
         'preset' => 'basic'
     ]) ?>

@@ -50,13 +50,13 @@ class BaseModel extends ActiveRecord
     {
         return [
             'softDeleteBehavior' => [
-                'class' => SoftDeleteBehavior::class,
+                'class' => SoftDeleteBehavior::className(),
                 'softDeleteAttributeValues' => [
                     'is_deleted' => true
                 ],
             ],
             'timestampBehavior' => [
-                'class' => TimestampBehavior::class,
+                'class' => TimestampBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
