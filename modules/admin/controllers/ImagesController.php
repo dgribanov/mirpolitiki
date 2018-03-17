@@ -25,7 +25,7 @@ class ImagesController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],
