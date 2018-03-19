@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property string     $description
  * @property integer    $header_image_id
  * @property integer    $type
+ * @property string     $url
  *
  * Relations:
  * @property ImageFile         $headerImage
@@ -21,6 +22,7 @@ use yii\helpers\ArrayHelper;
  *
  * Virtual fields:
  * @property array      $tagsList
+ * @property string     $typeString
  * @property string     $createdAt
  */
 class Article extends BaseModel
@@ -46,7 +48,7 @@ class Article extends BaseModel
     public function rules()
     {
         return [
-            [['text', 'title', 'description', 'header_image_id', 'type'], 'required'],
+            [['text', 'title', 'description', 'header_image_id', 'type', 'url'], 'required'],
         ];
     }
 
@@ -109,6 +111,23 @@ class Article extends BaseModel
     public function getUpdatedAt()
     {
         return \Yii::$app->formatter->asDate($this->updated_at);
+    }
+
+    public static function getTypeStringsList()
+    {
+        return [
+            Article::TYPE_POLITICS   => 'politika',
+            Article::TYPE_ECONOMICS  => 'ekonomika',
+            Article::TYPE_SOCIETY    => 'obschestvo',
+            Article::TYPE_EVENTS     => 'sobytija',
+            Article::TYPE_HISTORY    => 'istorija_kultura',
+            Article::TYPE_VIDEO      => 'video',
+        ];
+    }
+
+    public function getTypeString()
+    {
+        return Article::getTypeStringsList()[$this->type];
     }
 
     public static function getTypes() {

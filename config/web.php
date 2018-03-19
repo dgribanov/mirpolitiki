@@ -55,10 +55,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                [
+                /*[
                     'pattern' => '<controller>/<action>',
                     'route'   => '<controller>/<action>',
-                ],
+                ],*/
 
                 [
                     'pattern' => 'admin/<controller>/<action:(view|update|delete)>/<id:\d+>',
@@ -69,6 +69,10 @@ $config = [
                     'route'   => 'admin/<controller>/<action>',
                 ],
 
+                [
+                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video)>/<url:\S+>',
+                    'route'   => 'site/detail',
+                ],
                 [
                     'pattern' => '/',
                     'route'   => 'site/index',

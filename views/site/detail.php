@@ -51,7 +51,11 @@ use yii\helpers\Url;
 <b class="c">Другие статьи по теме:</b>
 <ul>
 <?php foreach ($similarArticles as $similarArticle): ?>
-    <li><a href="<?= Url::to(['site/detail', 'id' => $similarArticle['id']]); ?>"><?= $similarArticle['title']; ?></a></li>
+    <li><a href="<?= Url::to([
+            'site/detail',
+            'type' => \app\models\Article::getTypeStringsList()[$similarArticle['type']],
+            'url' => $similarArticle['url']
+        ]); ?>"><?= $similarArticle['title']; ?></a></li>
 <?php endforeach; ?>
 </ul>
 <!--<script type="text/javascript" src="/_js/xmlhttp.js"></script><hr><h3>Комментарии</h3><b><a name="addcom">Добавить комментарий</a></b><center><span class="sh11">Чтобы добавить комментарий, <a href="/users/">Войдите</a> или <a href="/register/">Зарегистрируйтесь</a></span></center><hr><br>-->

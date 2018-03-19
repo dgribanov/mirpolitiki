@@ -105,18 +105,21 @@ class SiteController extends Controller
     /**
      * Displays detail page.
      *
-     * @param $id integer
+     * @param $type string
+     * @param $url string
      *
      * @return mixed
      */
-    public function actionDetail($id = null)
+    public function actionDetail($type, $url)
     {
-        $article = $this->findModel($id);
+        $article = $this->findModel($url);
 
         $tags = $article->tagsList;
         $select = new Expression(
             'id,
             title,
+            url,
+            type,
             (SELECT Count(*) FROM articles as articles_count WHERE articles_count.is_deleted = false AND articles_count.type = articles.type) as typeCount,
             (SELECT Count(*) FROM articles_tags WHERE articles_tags.is_deleted = false AND articles.id = articles_tags.article_id AND articles_tags.tag_id IN (' . \implode(', ', $tags) . ')) as tagsCount'
         );
@@ -125,7 +128,7 @@ class SiteController extends Controller
                 ->select($select)
                 ->from('articles')
                 ->where(['articles.is_deleted' => false])
-                ->andWhere(['not', ['articles.id' => $id]])
+                ->andWhere(['not', ['articles.url' => $url]])
                 ->orderBy(['tagsCount' => SORT_DESC, 'typeCount' => SORT_DESC])
                 ->limit(5)
                 ->all();
@@ -199,13 +202,14 @@ class SiteController extends Controller
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $url
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($url)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        $model = Article::find()->andWhere(['url' => $url])->one();
+        if ($model !== null) {
             return $model;
         }
 

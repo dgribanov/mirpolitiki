@@ -22,7 +22,7 @@ $this->title = 'Геополитика и мировая политика';
 ?>
     <div class="b1">
         <h2>
-            <a href="<?= Url::to(['site/detail', 'id' => $article->id]); ?>" title="<?= $article->title; ?>">
+            <a href="<?= Url::to('@web/' . $article->typeString . '/' . $article->url); ?>" title="<?= $article->title; ?>">
                 <?= $article->title; ?>
             </a>
         </h2>
@@ -31,7 +31,7 @@ $this->title = 'Геополитика и мировая политика';
             <p><?= $article->description; ?></p>
         </div>
         <div class="r">
-            <a href="<?= Url::to(['site/detail', 'id' => $article->id]); ?>" title="<?= $article->title; ?>">
+            <a href="<?= Url::to(['site/detail', 'type' => $article->typeString, 'url' => $article->url]); ?>" title="<?= $article->title; ?>">
                 подробнее...
             </a>
         </div>

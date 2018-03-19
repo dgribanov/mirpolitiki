@@ -316,10 +316,10 @@ AppAsset::register($this);
                                 ->one();
                         ?>
                         <center>
-                            <a href="<?= Url::to(['site/detail', 'id' => $mainArticle->id]); ?>">
+                            <a href="<?= Url::to('@web/' . $mainArticle->typeString . '/' . $mainArticle->url); ?>">
                                 <img src="<?= $mainArticle->headerImage->path; ?>" alt="<?= $mainArticle->title; ?>" title="<?= $mainArticle->title; ?>" width="200" vspace="10">
                             </a>
-                            <a href="<?= Url::to(['site/detail', 'id' => $mainArticle->id]); ?>" title="<?= $mainArticle->description; ?>" class="link1">
+                            <a href="<?= Url::to('@web/' . $mainArticle->typeString . '/' . $mainArticle->url); ?>" title="<?= $mainArticle->description; ?>" class="link1">
                                 <br><?= $mainArticle->title; ?>
                             </a>
                         </center>
@@ -378,7 +378,7 @@ AppAsset::register($this);
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
                             <img src="<?= $eventsArticle->headerImage->path; ?>" alt="<?= $eventsArticle->title; ?>" title="<?= $eventsArticle->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= Url::to(['site/detail', 'id' => $eventsArticle->id]); ?>" title="<?= $eventsArticle->title; ?>">
+                                <a href="<?= Url::to('@web/' . $eventsArticle->typeString . '/' . $eventsArticle->url); ?>" title="<?= $eventsArticle->title; ?>">
                                     <?= $eventsArticle->title; ?>
                                 </a>
                             </div>
@@ -407,7 +407,7 @@ AppAsset::register($this);
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
                             <img src="<?= $societyArticle->headerImage->path; ?>" alt="<?= $societyArticle->title; ?>" title="<?= $societyArticle->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= Url::to(['site/detail', 'id' => $societyArticle->id]); ?>" title="<?= $societyArticle->title; ?>">
+                                <a href="<?= Url::to('@web/' . $societyArticle->typeString . '/' . $societyArticle->url); ?>" title="<?= $societyArticle->title; ?>">
                                     <?= $societyArticle->title; ?>
                                 </a>
                             </div>
@@ -468,7 +468,7 @@ AppAsset::register($this);
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
                             <img src="<?= $popularArticle->headerImage->path; ?>" alt="<?= $popularArticle->title; ?>" title="<?= $popularArticle->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= Url::to(['site/detail', 'id' => $popularArticle->id]); ?>" title="<?= $popularArticle->title; ?>">
+                                <a href="<?= Url::to('@web/' . $popularArticle->typeString . '/' . $popularArticle->url); ?>" title="<?= $popularArticle->title; ?>">
                                     <?= $popularArticle->title; ?>
                                 </a>
                             </div>
@@ -497,7 +497,7 @@ AppAsset::register($this);
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
                             <img src="<?= $videoArticle->headerImage->path; ?>" alt="<?= $videoArticle->title; ?>" title="<?= $videoArticle->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= $videoArticle->title; ?>" title="<?= $videoArticle->title; ?>">
+                                <a href="<?= Url::to('@web/' . $videoArticle->typeString . '/' . $videoArticle->url); ?>" title="<?= $videoArticle->title; ?>">
                                     <?= $videoArticle->title; ?>
                                 </a>
                             </div>
