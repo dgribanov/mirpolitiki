@@ -7,7 +7,6 @@ use app\models\ImageFile;
 use app\models\ImageFileSearch;
 use app\models\UploadImageForm;
 use yii\web\UploadedFile;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -16,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * ImagesController implements the CRUD actions for ImageFile model.
  */
-class ImagesController extends Controller
+class ImagesController extends BaseController
 {
     /**
      * @inheritdoc
@@ -98,7 +97,7 @@ class ImagesController extends Controller
             } catch (\LogicException $e) {
                 $transaction->rollBack();
 
-                Yii::$app->session->setFlash('error', $e->getMessage());
+                $this->sendExceptionFlash($e, 'Изображение не сохранено');
             }
         }
 
@@ -144,7 +143,7 @@ class ImagesController extends Controller
             } catch (\LogicException $e) {
                 $transaction->rollBack();
 
-                Yii::$app->session->setFlash('error', $e->getMessage());
+                $this->sendExceptionFlash($e, 'Изменения не сохранены');
             }
         }
 

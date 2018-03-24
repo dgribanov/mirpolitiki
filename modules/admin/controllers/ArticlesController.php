@@ -2,20 +2,20 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\ArticleTag;
-use app\models\Tag;
 use Yii;
 use app\models\Article;
 use app\models\ArticleSearch;
-use yii\web\Controller;
+use app\models\ArticleTag;
+use app\models\Tag;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
+
 /**
  * ArticlesController implements the CRUD actions for Article model.
  */
-class ArticlesController extends Controller
+class ArticlesController extends BaseController
 {
     /**
      * @inheritdoc
@@ -90,7 +90,10 @@ class ArticlesController extends Controller
                     throw new \LogicException('ошибка при сохранении статьи');
                 }
 
-                if (isset(Yii::$app->request->post('Article')['tagsList'])) {
+                if (
+                    isset(Yii::$app->request->post('Article')['tagsList']) &&
+                    !empty(Yii::$app->request->post('Article')['tagsList'])
+                ) {
                     $tagsList = Yii::$app->request->post('Article')['tagsList'];
 
                     foreach ($tagsList as $tagId) {
@@ -100,6 +103,8 @@ class ArticlesController extends Controller
                             $model->link('tags', $tag);
                         }
                     }
+                } else {
+                    throw new \LogicException('необходимо выбрать хотя бы один тег');
                 }
 
                 $transaction->commit();
@@ -107,6 +112,8 @@ class ArticlesController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             } catch (\LogicException $e) {
                 $transaction->rollBack();
+
+                $this->sendExceptionFlash($e, 'Статья не создана');
             }
         }
 
@@ -140,7 +147,10 @@ class ArticlesController extends Controller
                 $articleTags = $model->articleTags;
 
 
-                if (isset(Yii::$app->request->post('Article')['tagsList'])) {
+                if (
+                    isset(Yii::$app->request->post('Article')['tagsList']) &&
+                    !empty(Yii::$app->request->post('Article')['tagsList'])
+                ) {
                     $tagsList = Yii::$app->request->post('Article')['tagsList'];
 
                     foreach ($tagsList as $tagId) {
@@ -172,6 +182,8 @@ class ArticlesController extends Controller
                             }
                         }
                     }
+                } else {
+                    throw new \LogicException('необходимо выбрать хотя бы один тег');
                 }
 
                 foreach ($articleTags as $articleTag) {
@@ -187,6 +199,8 @@ class ArticlesController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             } catch (\LogicException $e) {
                 $transaction->rollBack();
+
+                $this->sendExceptionFlash($e, 'Изменения не сохранены');
             }
         }
 

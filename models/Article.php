@@ -34,6 +34,8 @@ class Article extends BaseModel
     const TYPE_HISTORY    = 5;
     const TYPE_VIDEO      = 6;
 
+    private $_tagsList;
+
     /**
      * @inheritdoc
      */
@@ -48,7 +50,22 @@ class Article extends BaseModel
     public function rules()
     {
         return [
-            [['text', 'title', 'description', 'header_image_id', 'type', 'url'], 'required'],
+            [
+                [
+                    'text',
+                    'title',
+                    'description',
+                    'header_image_id',
+                    'type',
+                    'url',
+                ],
+                'required'
+            ],
+            ['url', 'match', 'pattern' => '/^[a-z0-9-_]{5,120}.html$/i'],
+            /*['url', 'filter', 'filter' => function ($value) {
+                // normalize phone input here
+                return $value . '.html';
+            }],*/
         ];
     }
 

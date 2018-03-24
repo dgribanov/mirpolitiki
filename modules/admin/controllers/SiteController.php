@@ -2,7 +2,6 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\LoginForm;
@@ -10,7 +9,7 @@ use app\models\LoginForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BaseController
 {
     /**
      * @inheritdoc

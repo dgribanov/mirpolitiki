@@ -25,6 +25,8 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
 
     <?= $form->field($model, 'type')->dropDownList(Article::getTypesList()) ?>
 
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'header_image_id')->dropDownList(ImageFile::getAllImagesList()) ?>
 
     <?= $form->field($model, 'tagsList')
