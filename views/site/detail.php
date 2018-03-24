@@ -48,6 +48,7 @@ use yii\helpers\Url;
 </div>
 <script type="text/javascript" src="http://recreativ.ru/rcode.43b4f6798f.js"></script></center>
 <br>
+<?php if ($similarArticles): ?>
 <b class="c">Другие статьи по теме:</b>
 <ul>
 <?php foreach ($similarArticles as $similarArticle): ?>
@@ -58,4 +59,5 @@ use yii\helpers\Url;
         ]); ?>"><?= $similarArticle['title']; ?></a></li>
 <?php endforeach; ?>
 </ul>
+<?php endif; ?>
 <!--<script type="text/javascript" src="/_js/xmlhttp.js"></script><hr><h3>Комментарии</h3><b><a name="addcom">Добавить комментарий</a></b><center><span class="sh11">Чтобы добавить комментарий, <a href="/users/">Войдите</a> или <a href="/register/">Зарегистрируйтесь</a></span></center><hr><br>-->

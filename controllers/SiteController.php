@@ -114,24 +114,28 @@ class SiteController extends Controller
     {
         $article = $this->findModel($url);
 
+        $similarArticles = [];
         $tags = $article->tagsList;
-        $select = new Expression(
-            'id,
+        if ($tags) {
+            $select = new Expression(
+                'id,
             title,
             url,
             type,
             (SELECT Count(*) FROM articles as articles_count WHERE articles_count.is_deleted = false AND articles_count.type = articles.type) as typeCount,
             (SELECT Count(*) FROM articles_tags WHERE articles_tags.is_deleted = false AND articles.id = articles_tags.article_id AND articles_tags.tag_id IN (' . \implode(', ', $tags) . ')) as tagsCount'
-        );
-        $similarArticles =
-            (new Query())
-                ->select($select)
-                ->from('articles')
-                ->where(['articles.is_deleted' => false])
-                ->andWhere(['not', ['articles.url' => $url]])
-                ->orderBy(['tagsCount' => SORT_DESC, 'typeCount' => SORT_DESC])
-                ->limit(5)
-                ->all();
+            );
+
+            $similarArticles =
+                (new Query())
+                    ->select($select)
+                    ->from('articles')
+                    ->where(['articles.is_deleted' => false])
+                    ->andWhere(['not', ['articles.url' => $url]])
+                    ->orderBy(['tagsCount' => SORT_DESC, 'typeCount' => SORT_DESC])
+                    ->limit(5)
+                    ->all();
+        }
 
         return $this->render('detail', [
             'article' => $article,
