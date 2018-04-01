@@ -74,6 +74,10 @@ $config = [
                     'route'   => 'site/detail',
                 ],
                 [
+                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video)>',
+                    'route'   => 'site/index',
+                ],
+                [
                     'pattern' => '/',
                     'route'   => 'site/index',
                 ],

@@ -33,6 +33,7 @@ class Article extends BaseModel
     const TYPE_EVENTS     = 4;
     const TYPE_HISTORY    = 5;
     const TYPE_VIDEO      = 6;
+    const TYPE_ENGLISH    = 7;
 
     private $_tagsList;
 
@@ -139,6 +140,7 @@ class Article extends BaseModel
             Article::TYPE_EVENTS     => 'sobytija',
             Article::TYPE_HISTORY    => 'istorija_kultura',
             Article::TYPE_VIDEO      => 'video',
+            Article::TYPE_ENGLISH    => 'eng',
         ];
     }
 
@@ -155,6 +157,7 @@ class Article extends BaseModel
             Article::TYPE_EVENTS,
             Article::TYPE_HISTORY,
             Article::TYPE_VIDEO,
+            Article::TYPE_ENGLISH,
         ];
     }
 
@@ -166,6 +169,15 @@ class Article extends BaseModel
             Article::TYPE_EVENTS      => 'События',
             Article::TYPE_HISTORY     => 'История и культура',
             Article::TYPE_VIDEO       => 'Видео',
+            Article::TYPE_ENGLISH     => 'Eng',
         ];
+    }
+
+    public static function getTypePublicName($type) {
+        return self::getTypesList()[$type];
+    }
+
+    public static function getTypeInnerName($type) {
+        return self::getTypeStringsList()[$type];
     }
 }

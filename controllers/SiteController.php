@@ -74,8 +74,17 @@ class SiteController extends Controller
     {
         $query = Article::find();
 
-        if ($type && \in_array((int)$type, Article::getTypes())) {
-            $query->andWhere(['type' => $type]);
+        if ($type && \in_array($type, Article::getTypeStringsList())) {
+            $typeId = \array_search($type, Article::getTypeStringsList());
+            $query->andWhere(['type' => $typeId]);
+        } else {
+            $query->andWhere([
+                'type' => [
+                    Article::TYPE_POLITICS,
+                    Article::TYPE_ECONOMICS,
+                    Article::TYPE_HISTORY,
+                ]
+            ]);
         }
 
         if ($tag && isset(Tag::getAllTagsList()[$tag])) {

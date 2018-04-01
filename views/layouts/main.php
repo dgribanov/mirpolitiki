@@ -179,16 +179,16 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'Политика',
+                                Article::getTypePublicName(Article::TYPE_POLITICS),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_POLITICS
+                                        'type' => Article::getTypeInnerName(Article::TYPE_POLITICS),
                                     ]
                                 ),
                                 [
-                                    'title' => 'Политика',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_POLITICS ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_POLITICS),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_POLITICS) ?
                                         'current' :
                                         null,
                                 ]
@@ -197,16 +197,16 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'Экономика',
+                                Article::getTypePublicName(Article::TYPE_ECONOMICS),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_ECONOMICS
+                                        'type' => Article::getTypeInnerName(Article::TYPE_ECONOMICS),
                                     ]
                                 ),
                                 [
-                                    'title' => 'Экономика',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_ECONOMICS ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_ECONOMICS),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_ECONOMICS) ?
                                         'current' :
                                         null,
                                 ]
@@ -215,16 +215,16 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'События',
+                                Article::getTypePublicName(Article::TYPE_EVENTS),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_EVENTS
+                                        'type' => Article::getTypeInnerName(Article::TYPE_EVENTS),
                                     ]
                                 ),
                                 [
-                                    'title' => 'События',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_EVENTS ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_EVENTS),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_EVENTS) ?
                                         'current' :
                                         null,
                                 ]
@@ -233,16 +233,16 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'Общество',
+                                Article::getTypePublicName(Article::TYPE_SOCIETY),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_SOCIETY
+                                        'type' => Article::getTypeInnerName(Article::TYPE_SOCIETY),
                                     ]
                                 ),
                                 [
-                                    'title' => 'Общество',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_SOCIETY ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_SOCIETY),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_SOCIETY) ?
                                         'current' :
                                         null,
                                 ]
@@ -251,16 +251,16 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'История и культура',
+                                Article::getTypePublicName(Article::TYPE_HISTORY),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_HISTORY
+                                        'type' => Article::getTypeInnerName(Article::TYPE_HISTORY),
                                     ]
                                 ),
                                 [
-                                    'title' => 'История и культура',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_HISTORY ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_HISTORY),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_HISTORY) ?
                                         'current' :
                                         null,
                                 ]
@@ -269,20 +269,38 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <?= Html::a(
-                                'Видео',
+                                Article::getTypePublicName(Article::TYPE_VIDEO),
                                 Url::to(
                                     [
                                         'site/index',
-                                        'type' => Article::TYPE_VIDEO
+                                        'type' => Article::getTypeInnerName(Article::TYPE_VIDEO),
                                     ]
                                 ),
                                 [
-                                    'title' => 'Видео',
-                                    'class' => \Yii::$app->request->get('type') == Article::TYPE_VIDEO ?
+                                    'title' => Article::getTypePublicName(Article::TYPE_VIDEO),
+                                    'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_VIDEO) ?
                                         'current' :
                                         null,
                                 ]
                             );
+                        ?>
+                    </li>
+                    <li>
+                        <?= Html::a(
+                            Article::getTypePublicName(Article::TYPE_ENGLISH),
+                            Url::to(
+                                [
+                                    'site/index',
+                                    'type' => Article::getTypeInnerName(Article::TYPE_ENGLISH),
+                                ]
+                            ),
+                            [
+                                'title' => Article::getTypePublicName(Article::TYPE_ENGLISH),
+                                'class' => \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_ENGLISH) ?
+                                    'current' :
+                                    null,
+                            ]
+                        );
                         ?>
                     </li>
                 </ul>
@@ -358,6 +376,13 @@ AppAsset::register($this);
                     <script type="text/javascript" src="http://recreativ.ru/rcode.e6fcadf498.js"></script>
                 </div>
 
+            <?php
+                if (
+                    !\Yii::$app->request->get('type') ||
+                    \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_POLITICS) ||
+                    \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_ECONOMICS)
+                ):
+            ?>
                 <div class="box">
                     <div class="block-head">
                         События
@@ -386,7 +411,44 @@ AppAsset::register($this);
                         <div class="clearer"></div>
                     <?php endforeach; ?>
                 </div>
+            <?php else: ?>
+                <div class="box">
+                    <div class="block-head">
+                        Политика
+                    </div>
+                    <div class="clearer"></div>
+                    <?php
+                        /**
+                         * @var $politicsArticles Article[]
+                         */
+                        $politicsArticles = Article::find()
+                            ->andWhere(['type' => Article::TYPE_POLITICS])
+                            ->orderBy(['created_at' => SORT_DESC])
+                            ->limit(5)
+                            ->all();
 
+                        foreach ($politicsArticles as $politicsArticle):
+                    ?>
+                        <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
+                            <img src="<?= $politicsArticle->headerImage->path; ?>" alt="<?= $politicsArticle->title; ?>" title="<?= $politicsArticle->title; ?>" class="fleft" width="70" hspace="2">
+                            <div style="height: 56px; overflow: hidden; ">
+                                <a href="<?= Url::to('@web/' . $politicsArticle->typeString . '/' . $politicsArticle->url); ?>" title="<?= $politicsArticle->title; ?>">
+                                    <?= $politicsArticle->title; ?>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearer"></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php
+                if (
+                    !\Yii::$app->request->get('type') ||
+                    \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_POLITICS) ||
+                    \Yii::$app->request->get('type') == Article::getTypeInnerName(Article::TYPE_ECONOMICS)
+                ):
+            ?>
                 <div class="box">
                     <div class="block-head">
                         Общество
@@ -415,6 +477,36 @@ AppAsset::register($this);
                         <div class="clearer"></div>
                     <?php endforeach; ?>
                 </div>
+            <?php else: ?>
+                <div class="box">
+                    <div class="block-head">
+                        Экономика
+                    </div>
+                    <div class="clearer"></div>
+                    <?php
+                        /**
+                         * @var $economicsArticles Article[]
+                         */
+                        $economicsArticles = Article::find()
+                            ->andWhere(['type' => Article::TYPE_ECONOMICS])
+                            ->orderBy(['created_at' => SORT_DESC])
+                            ->limit(5)
+                            ->all();
+
+                        foreach ($economicsArticles as $economicsArticle):
+                    ?>
+                        <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
+                            <img src="<?= $economicsArticle->headerImage->path; ?>" alt="<?= $economicsArticle->title; ?>" title="<?= $economicsArticle->title; ?>" class="fleft" width="70" hspace="2">
+                            <div style="height: 56px; overflow: hidden; ">
+                                <a href="<?= Url::to('@web/' . $economicsArticle->typeString . '/' . $economicsArticle->url); ?>" title="<?= $economicsArticle->title; ?>">
+                                    <?= $economicsArticle->title; ?>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearer"></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
                 <div class="box"></div>
             </div>
         </div>
