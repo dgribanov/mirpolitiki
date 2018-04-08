@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'description',
             //'text:ntext',
             [
-                'class' => yii\grid\DataColumn::class,
+                'class' => yii\grid\DataColumn::className(),
                 'attribute' => 'type',
                 'filter' => Article::getTypesList(),
                 'value' => function (Article $model, $key, $index, $column) {

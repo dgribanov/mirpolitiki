@@ -3,7 +3,7 @@
 namespace app\modules\admin;
 
 use Yii;
-use \yii\base\Module;
+use yii\base\Module;
 
 /**
  * Admin module class

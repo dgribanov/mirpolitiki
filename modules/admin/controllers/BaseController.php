@@ -40,7 +40,8 @@ abstract class BaseController extends Controller
      */
     protected function sendExceptionFlash(LogicException $e, $defaultMessage = null, $defaultReason = null)
     {
-        $reason = empty($e->getMessage()) ? $defaultReason : $e->getMessage();
+        $message = $e->getMessage();
+        $reason = empty($message) ? $defaultReason : $message;
 
         return $this->sendMessage($defaultMessage, $reason, self::EXCEPTION_FLASH_MESSAGE);
     }
