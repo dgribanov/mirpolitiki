@@ -27,7 +27,19 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'header_image_id')->dropDownList(ImageFile::getAllImagesList()) ?>
+    <?= $form->field($model, 'header_image_id')
+        ->widget(Select2::classname(),
+            [
+                'data' => ImageFile::getAllImagesList(),
+                'options' => [
+                    'placeholder' => $model->getAttributeLabel('header_image_id'),
+                ],
+                'pluginOptions' => [
+                    'allowClear' => false,
+                ],
+            ]
+        );
+    ?>
 
     <?= $form->field($model, 'tagsList')
         ->widget(Select2::classname(),
@@ -55,7 +67,7 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

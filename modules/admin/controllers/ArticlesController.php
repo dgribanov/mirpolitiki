@@ -10,6 +10,9 @@ use app\models\Tag;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use app\models\MainArticle;
+use app\models\PopularArticle;
+use app\models\RecommendedArticle;
 
 
 /**
@@ -27,7 +30,7 @@ class ArticlesController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'select-article-placement'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -221,6 +224,67 @@ class ArticlesController extends BaseController
         $this->findModel($id)->softDelete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Select article placement.
+     *
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSelectArticlePlacement()
+    {
+        /**
+         * @var $mainArticle MainArticle
+         */
+        $mainArticle = MainArticle::find()->one();
+
+        /**
+         * @var $popularArticles PopularArticle[]
+         */
+        $popularArticles = PopularArticle::find()->all();
+
+        /**
+         * @var $recommendedArticles RecommendedArticle[]
+         */
+        $recommendedArticles = RecommendedArticle::find()->all();
+
+        if (Yii::$app->request->isPost) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                if (!$mainArticle->load(Yii::$app->request->post()) || !$mainArticle->save()) {
+                    throw new \LogicException('ошибка при сохранении основной статьи');
+                }
+
+                foreach ($popularArticles as $index => $popularArticle) {
+                    $popularArticle->article_id = (int)Yii::$app->request->post('PopularArticle')[$index]['article_id'];
+                    if (!$popularArticle->save()) {
+                        throw new \LogicException('ошибка при сохранении популярной статьи');
+                    }
+                }
+
+                foreach ($recommendedArticles as $index => $recommendedArticle) {
+                    $recommendedArticle->article_id = (int)Yii::$app->request->post('RecommendedArticle')[$index]['article_id'];
+                    if (!$recommendedArticle->save()) {
+                        throw new \LogicException('ошибка при сохранении рекомендованной статьи');
+                    }
+                }
+
+                $transaction->commit();
+
+                return $this->redirect(['index']);
+            } catch (\LogicException $e) {
+                $transaction->rollBack();
+
+                $this->sendExceptionFlash($e, 'Изменения не сохранены');
+            }
+        }
+
+        return $this->render('article_placement', [
+            'mainArticle' => $mainArticle,
+            'popularArticles' => $popularArticles,
+            'recommendedArticles' => $recommendedArticles,
+        ]);
     }
 
     /**

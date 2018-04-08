@@ -3,9 +3,13 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticleSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use app\models\Article;
+
+/**
+ * @var $this yii\web\View
+ * @var $searchModel app\models\ArticleSearch
+ * @var $dataProvider yii\data\ActiveDataProvider
+ */
 
 $this->title = 'Статьи';
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Создать статью', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Редактировать расположение статей', ['select-article-placement'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -30,6 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             //'description',
             //'text:ntext',
+            [
+                'class' => yii\grid\DataColumn::class,
+                'attribute' => 'type',
+                'filter' => Article::getTypesList(),
+                'value' => function (Article $model, $key, $index, $column) {
+                    return Article::getTypesList()[$model->type];
+                },
+            ],
             'is_deleted:boolean',
             'created_at:date',
             'updated_at:date',

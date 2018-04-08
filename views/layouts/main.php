@@ -1,14 +1,17 @@
 <?php
 
-/**
- * @var $this \yii\web\View
- * @var $content string
- */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\assets\AppAsset;
 use app\models\Article;
+use app\models\MainArticle;
+use app\models\PopularArticle;
+use app\models\RecommendedArticle;
+
+/**
+ * @var $this \yii\web\View
+ * @var $content string
+ */
 
 AppAsset::register($this);
 ?>
@@ -326,23 +329,20 @@ AppAsset::register($this);
                     <div>
                         <?php
                             /**
-                             * @var $mainArticle Article
+                             * @var $mainArticle MainArticle
                              */
-                            $mainArticle = Article::find()
-                                ->orderBy(['created_at' => SORT_DESC])
-                                ->limit(1)
-                                ->one();
+                            $mainArticle = MainArticle::find()->one();
                         ?>
                         <center>
-                            <a href="<?= Url::to('@web/' . $mainArticle->typeString . '/' . $mainArticle->url); ?>">
-                                <img src="<?= $mainArticle->headerImage->path; ?>" alt="<?= $mainArticle->title; ?>" title="<?= $mainArticle->title; ?>" width="200" vspace="10">
+                            <a href="<?= Url::to('@web/' . $mainArticle->article->typeString . '/' . $mainArticle->article->url); ?>">
+                                <img src="<?= $mainArticle->article->headerImage->path; ?>" alt="<?= $mainArticle->article->title; ?>" title="<?= $mainArticle->article->title; ?>" width="200" vspace="10">
                             </a>
-                            <a href="<?= Url::to('@web/' . $mainArticle->typeString . '/' . $mainArticle->url); ?>" title="<?= $mainArticle->description; ?>" class="link1">
-                                <br><?= $mainArticle->title; ?>
+                            <a href="<?= Url::to('@web/' . $mainArticle->article->typeString . '/' . $mainArticle->article->url); ?>" title="<?= $mainArticle->article->description; ?>" class="link1">
+                                <br><?= $mainArticle->article->title; ?>
                             </a>
                         </center>
                         <p class="jj">
-                            <?= $mainArticle->description; ?>
+                            <?= $mainArticle->article->description; ?>
                         </p>
                     </div>
                 </div>
@@ -548,20 +548,17 @@ AppAsset::register($this);
                     <div class="clearer"></div>
                     <?php
                         /**
-                         * @var $popularArticles Article[]
+                         * @var $popularArticles PopularArticle[]
                          */
-                        $popularArticles = Article::find()
-                            ->orderBy(['created_at' => SORT_DESC])
-                            ->limit(5)
-                            ->all();
+                        $popularArticles = PopularArticle::find()->all();
 
                         foreach ($popularArticles as $popularArticle):
                     ?>
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
-                            <img src="<?= $popularArticle->headerImage->path; ?>" alt="<?= $popularArticle->title; ?>" title="<?= $popularArticle->title; ?>" class="fleft" width="70" hspace="2">
+                            <img src="<?= $popularArticle->article->headerImage->path; ?>" alt="<?= $popularArticle->article->title; ?>" title="<?= $popularArticle->article->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= Url::to('@web/' . $popularArticle->typeString . '/' . $popularArticle->url); ?>" title="<?= $popularArticle->title; ?>">
-                                    <?= $popularArticle->title; ?>
+                                <a href="<?= Url::to('@web/' . $popularArticle->article->typeString . '/' . $popularArticle->article->url); ?>" title="<?= $popularArticle->article->title; ?>">
+                                    <?= $popularArticle->article->title; ?>
                                 </a>
                             </div>
                         </div>
@@ -571,26 +568,22 @@ AppAsset::register($this);
 
                 <div class="box">
                     <div class="block-head">
-                        Рекомендованное видео
+                        Рекомендованные статьи
                     </div>
                     <div class="clearer"></div>
                     <?php
                         /**
-                         * @var $videoArticles Article[]
+                         * @var $recommendedArticles RecommendedArticle[]
                          */
-                        $videoArticles = Article::find()
-                            ->andWhere(['type' => Article::TYPE_VIDEO])
-                            ->orderBy(['created_at' => SORT_DESC])
-                            ->limit(5)
-                            ->all();
+                        $recommendedArticles = RecommendedArticle::find()->all();
 
-                        foreach ($videoArticles as $videoArticle):
+                        foreach ($recommendedArticles as $recommendedArticle):
                     ?>
                         <div style="margin-bottom: 5px; border: 1px solid #EEEEEE;">
-                            <img src="<?= $videoArticle->headerImage->path; ?>" alt="<?= $videoArticle->title; ?>" title="<?= $videoArticle->title; ?>" class="fleft" width="70" hspace="2">
+                            <img src="<?= $recommendedArticle->article->headerImage->path; ?>" alt="<?= $recommendedArticle->article->title; ?>" title="<?= $recommendedArticle->article->title; ?>" class="fleft" width="70" hspace="2">
                             <div style="height: 56px; overflow: hidden; ">
-                                <a href="<?= Url::to('@web/' . $videoArticle->typeString . '/' . $videoArticle->url); ?>" title="<?= $videoArticle->title; ?>">
-                                    <?= $videoArticle->title; ?>
+                                <a href="<?= Url::to('@web/' . $recommendedArticle->article->typeString . '/' . $recommendedArticle->article->url); ?>" title="<?= $recommendedArticle->article->title; ?>">
+                                    <?= $recommendedArticle->article->title; ?>
                                 </a>
                             </div>
                         </div>

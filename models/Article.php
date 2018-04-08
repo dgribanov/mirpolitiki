@@ -27,6 +27,7 @@ use yii\helpers\ArrayHelper;
  */
 class Article extends BaseModel
 {
+    const TYPE_EMPTY      = 0;
     const TYPE_POLITICS   = 1;
     const TYPE_ECONOMICS  = 2;
     const TYPE_SOCIETY    = 3;
@@ -62,7 +63,14 @@ class Article extends BaseModel
                 ],
                 'required'
             ],
-            ['url', 'match', 'pattern' => '/^[a-z0-9-_]{5,120}.html$/i'],
+            [
+                'url',
+                'match',
+                'pattern' => '/^[a-z0-9-_]{5,120}.html$/i',
+                'when' => function(Article $model) {
+                    return (int)$model->type !== Article::TYPE_EMPTY;
+                }
+            ],
             /*['url', 'filter', 'filter' => function ($value) {
                 // normalize phone input here
                 return $value . '.html';
@@ -151,6 +159,7 @@ class Article extends BaseModel
 
     public static function getTypes() {
         return [
+            Article::TYPE_EMPTY,
             Article::TYPE_POLITICS,
             Article::TYPE_ECONOMICS,
             Article::TYPE_SOCIETY,
@@ -163,6 +172,7 @@ class Article extends BaseModel
 
     public static function getTypesList() {
         return [
+            Article::TYPE_EMPTY       => 'Без раздела',
             Article::TYPE_POLITICS    => 'Политика',
             Article::TYPE_ECONOMICS   => 'Экономика',
             Article::TYPE_SOCIETY     => 'Общество',
@@ -179,5 +189,13 @@ class Article extends BaseModel
 
     public static function getTypeInnerName($type) {
         return self::getTypeStringsList()[$type];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllArticlesList()
+    {
+        return ArrayHelper::map(self::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'title');
     }
 }
