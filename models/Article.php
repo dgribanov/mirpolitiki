@@ -131,12 +131,12 @@ class Article extends BaseModel
 
     public function getCreatedAt()
     {
-        return \Yii::$app->formatter->asDate($this->created_at);
+        return \Yii::$app->formatter->asDate($this->created_at, 'long');
     }
 
     public function getUpdatedAt()
     {
-        return \Yii::$app->formatter->asDate($this->updated_at);
+        return \Yii::$app->formatter->asDate($this->updated_at, 'long');
     }
 
     public static function getTypeStringsList()

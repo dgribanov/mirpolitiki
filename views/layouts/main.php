@@ -512,7 +512,7 @@ AppAsset::register($this);
         </div>
         <div id="rightcolumn">
             <div class="innertube">
-                <div class="box">
+                <!--<div class="box">
                     <form action="http://mirpolitiki.net/search/" id="cse-search-box">
                         <div>
                             <input name="cx" value="partner-pub-9812722480628202:6268022372" type="hidden">
@@ -528,7 +528,7 @@ AppAsset::register($this);
                     <script type="text/javascript" src="http://www.google.com/cse/t13n?form=cse-search-box&amp;t13n_langs=en"></script>
 
                     <script type="text/javascript" src="http://www.google.ru/coop/cse/brand?form=cse-search-box&amp;lang=ru"></script>
-                </div>
+                </div>-->
 
 
                 <div class="box">
@@ -614,10 +614,10 @@ AppAsset::register($this);
     <div id="footer" class="main2 r">
         <div class="fleft footer-left">Геополитика и мировая политика</div>
         <div class="fright footer-right">
-            <div class="fleft footer-right">
+           <!-- <div class="fleft footer-right">
                 &nbsp;|&nbsp;
                 <a href="feedback/" title="Обратная связь">Обратная связь</a>
-            </div>
+            </div>-->
             &nbsp;&nbsp;<!--LiveInternet counter-->
             <script type="text/javascript"><!--
                 document.write("<a href='http://www.liveinternet.ru/click' "+
