@@ -1,5 +1,6 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\assets\AppAsset;
@@ -7,6 +8,10 @@ use app\models\Article;
 use app\models\MainArticle;
 use app\models\PopularArticle;
 use app\models\RecommendedArticle;
+
+$sapePath = Yii::getAlias('@webroot/2691b322ffe3d2ffd1b2876442963856/sape.php');
+include_once($sapePath);
+$sapeClient = new SAPE_client();
 
 /**
  * @var $this \yii\web\View
@@ -507,7 +512,10 @@ AppAsset::register($this);
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-                <div class="box"></div>
+
+                <div class="box">
+                    <?= $sapeClient->return_links(5); ?>
+                </div>
             </div>
         </div>
         <div id="rightcolumn">
