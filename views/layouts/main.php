@@ -1,6 +1,5 @@
 <?php
 
-use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\assets\AppAsset;
@@ -9,7 +8,7 @@ use app\models\MainArticle;
 use app\models\PopularArticle;
 use app\models\RecommendedArticle;
 
-$sapePath = Yii::getAlias('@webroot/2691b322ffe3d2ffd1b2876442963856/sape.php');
+$sapePath = \Yii::getAlias('@webroot/2691b322ffe3d2ffd1b2876442963856/sape.php');
 include_once($sapePath);
 $sapeClient = new SAPE_client();
 
