@@ -70,11 +70,11 @@ $config = [
                 ],
 
                 [
-                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video)>/<url:\S+>',
+                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video|eng)>/<url:\S+>',
                     'route'   => 'site/detail',
                 ],
                 [
-                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video)>',
+                    'pattern' => '<type:(politika|obschestvo|istorija_kultura|sobytija|ekonomika|video|eng)>',
                     'route'   => 'site/index',
                 ],
                 [
