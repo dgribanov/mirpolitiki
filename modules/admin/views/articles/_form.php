@@ -57,13 +57,17 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
     ?>
 
     <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6],
-        'preset' => 'basic'
+        'options' => [
+            'rows' => 6
+        ],
+        'preset' => 'full'
     ]) ?>
 
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
-        'options' => ['rows' => 12],
-        'preset' => 'basic'
+        'options' => [
+            'rows' => 12,
+        ],
+        'preset' => 'full'
     ]) ?>
 
     <div class="form-group">
