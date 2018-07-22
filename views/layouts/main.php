@@ -602,9 +602,7 @@ AppAsset::register($this);
                     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?48"></script>
 
                     <!-- VK Widget -->
-                    <div id="vk_groups" style="width: 240px; height: 250px; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;">
-                        <iframe name="fXD58654" src="https://vk.com/widget_community.php?app=0&amp;width=240px&amp;_ver=1&amp;gid=35647432&amp;mode=0&amp;color1=&amp;color2=&amp;color3=&amp;class_name=&amp;height=250&amp;url=http%3A%2F%2Fmirpolitiki.net%2F&amp;referrer=&amp;title=%D0%93%D0%B5%D0%BE%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%B8%20%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0&amp;160d62e8c86" scrolling="no" id="vkwidget1" style="overflow: hidden; height: 250px;" width="240" height="250" frameborder="0"></iframe>
-                    </div>
+                    <div id="vk_groups" style="width: 240px; height: 250px; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;"></div>
                     <script type="text/javascript">
                         VK.Widgets.Group("vk_groups", {mode: 0, width: "240", height: "250"}, 35647432);
                     </script>
