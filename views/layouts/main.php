@@ -636,9 +636,6 @@ AppAsset::register($this);
                     "border='0' width='88' height='31'></a>")
                 //-->
             </script>
-            <a href="http://www.liveinternet.ru/click" target="_blank">
-                <img src="//counter.yadro.ru/hit?t22.1;r;s1366*768*24;uhttp%3A//mirpolitiki.net/;0.35947383680896383" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" width="88" border="0" height="31">
-            </a>
             <!--/LiveInternet-->
         </div>
     </div>
