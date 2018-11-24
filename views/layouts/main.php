@@ -537,6 +537,19 @@ AppAsset::register($this);
                     <script type="text/javascript" src="http://www.google.ru/coop/cse/brand?form=cse-search-box&amp;lang=ru"></script>
                 </div>-->
 
+                <script>
+                    (function() {
+                        var cx = '011450190679598054977:th9msdn_9xm';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                    })();
+                </script>
+                <gcse:search></gcse:search>
+
 
                 <div class="box">
                     <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
