@@ -539,7 +539,8 @@ AppAsset::register($this);
 
                 <script>
                     (function() {
-                        var cx = '011450190679598054977:th9msdn_9xm';
+                        //var cx = '011450190679598054977:th9msdn_9xm';
+                        var cx = 'partner-pub-9812722480628202:6268022372';
                         var gcse = document.createElement('script');
                         gcse.type = 'text/javascript';
                         gcse.async = true;
