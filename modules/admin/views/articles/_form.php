@@ -60,14 +60,20 @@ dosamigos\ckeditor\CKEditorWidgetAsset::register($this);
         'options' => [
             'rows' => 6
         ],
-        'preset' => 'full'
+        'preset' => 'full',
+        'clientOptions' => [
+            'allowedContent' => true,
+        ]
     ]) ?>
 
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'options' => [
             'rows' => 12,
         ],
-        'preset' => 'full'
+        'preset' => 'full',
+        'clientOptions' => [
+            'allowedContent' => true,
+        ]
     ]) ?>
 
     <div class="form-group">
